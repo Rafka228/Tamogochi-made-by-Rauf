@@ -1,0 +1,56 @@
+import random
+import time
+
+class Cat:
+    def __init__(self, name):
+        self.name = name
+        self.energy = 100
+        self.happiness = 100
+        self.hunger = 0
+
+    def play(self):
+        if self.energy >= 10 and self.happiness >= 10:
+            print(f"{self.name} играет с игрушкой.")
+            self.energy -= 10
+            self.happiness += 5
+        else:
+            print(f"{self.name} слишком устал для игры или не в настроении.")
+
+    def sleep(self):
+        print(f"{self.name} спит.")
+        self.energy += 20
+        self.happiness -= 5
+
+    def eat(self):
+        print(f"{self.name} ест.")
+        self.hunger = 0
+        self.energy += 10
+
+    def check_status(self):
+        print(f"Состояние {self.name}: Энергия - {self.energy}, Счастье - {self.happiness}, Голод - {self.hunger}")
+
+    def simulate_life(self, days):
+        for day in range(1, days+1):
+            print(f"\nДень {day}:")
+
+            # Случайные действия котика
+            action = random.choice(["play", "sleep", "eat"])
+            if action == "play":
+                self.play()
+            elif action == "sleep":
+                self.sleep()
+            else:
+                self.eat()
+
+            # Симуляция времени
+            time.sleep(1)
+
+            # Увеличение голода
+            self.hunger += 10
+
+            # Обновление статуса
+            self.check_status()
+
+# Пример использования класса
+my_cat = Cat("Оги")
+my_cat.simulate_life(30)
